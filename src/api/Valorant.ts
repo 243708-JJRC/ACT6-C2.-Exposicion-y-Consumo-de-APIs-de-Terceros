@@ -19,14 +19,14 @@ export interface Weapon {
     fireRate: number; 
     magazineSize: number;
     reloadTimeSeconds: number;
+    damageRanges: {
+      rangeStartMeters: number;
+      rangeEndMeters: number;
+      headDamage: number;
+      bodyDamage: number;
+      legDamage: number;
+    }[]; 
   } | null;
-  damageRanges: {
-    rangeStartMeters: number;
-    rangeEndMeters: number;
-    headDamage: number;
-    bodyDamage: number;
-    legDamage: number;
-  }[] | null;
   shopData: {
     cost: number;
   } | null;
@@ -36,7 +36,6 @@ export interface Weapon {
 export interface MapData {
   uuid: string;
   displayName: string;
-  narrativeDescription: string | null;
   tacticalDescription: string | null;
   coordinates: string | null;
   displayIcon: string | null;
@@ -57,6 +56,7 @@ export interface Skin {
     swatch: string | null;
   }[];
 }
+
 
 export const getAgents = async (): Promise<Agent[]> => {
   try {
@@ -146,4 +146,22 @@ export const getMaps = async (): Promise<MapData[]> => {
         console.error("Error al obtener los mapas: ",error);
         throw error;
     }
+};
+
+export const getMapById = async (id: string): Promise<MapData> => {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_VALORANT_API_URL || 'https://valorant-api.com/v1';
+    const response = await fetch(`${baseUrl}/maps/${id}?language=es-MX`);
+    
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.data; 
+    
+  } catch (error) {
+    console.error("Error en getMapById:", error);
+    throw error; 
+  }
 };
