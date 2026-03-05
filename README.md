@@ -1,7 +1,7 @@
 # ACT6-C2. Exposición y Consumo de APIs de Terceros
 
 ## API VALORANT
-Esta es una aplicación web construida con Next.js 15, diseñada bajo los principios de Arquitectura Orientada a Servicios (SOA). La plataforma consume la API oficial de Valorant para ofrecer información en tiempo real sobre agentes, armas (con sus estadísticas y skins) y mapas tácticos.
+Esta es una aplicación web construida con Next.js 16, diseñada bajo los principios de Arquitectura Orientada a Servicios (SOA). La plataforma consume la API oficial de Valorant para ofrecer información en tiempo real sobre agentes, armas (con sus estadísticas y skins) y mapas tácticos.
 
 ### Características Principales
 - Arquitectura SOA: Separación estricta entre la capa de presentación (UI) y la capa de servicios (API).
