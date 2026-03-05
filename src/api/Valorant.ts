@@ -1,12 +1,21 @@
 export interface Agent {
   uuid: string;
   displayName: string;
-  description: string;
+  description: string;   
   fullPortrait: string;
+  background: string; 
   role: {
     displayName: string;
-    displayIcon: string; 
+    displayIcon: string;
   } | null;
+  abilities: Ability[];
+}
+
+export interface Ability {
+  slot: string;
+  displayName: string;
+  description: string;
+  displayIcon: string | null;
 }
 
 export interface Weapon { 
@@ -76,6 +85,19 @@ export const getAgents = async (): Promise<Agent[]> => {
   }
 };
 
+export const getAgentById = async (id: string): Promise<Agent> => {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_VALORANT_API_URL;
+    const response = await fetch(`${baseUrl}/agents/${id}?language=es-MX`);
+    if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+    const data = await response.json();
+    return data.data; 
+  } catch (error) {
+    console.error("Error en getAgentById:", error);
+    throw error; 
+  }
+};
+
 export const getWeapons = async (): Promise<Weapon[]> => {
     try{
         const baseUrl = process.env.NEXT_PUBLIC_VALORANT_API_URL;
@@ -96,7 +118,7 @@ export const getWeapons = async (): Promise<Weapon[]> => {
 
 export const getWeaponById = async (uuid: string): Promise<Weapon> => {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_VALORANT_API_URL || 'https://valorant-api.com/v1';
+    const baseUrl = process.env.NEXT_PUBLIC_VALORANT_API_URL;
     const response = await fetch(`${baseUrl}/weapons/${uuid}?language=es-MX`);
     
     if (!response.ok) {
@@ -150,7 +172,7 @@ export const getMaps = async (): Promise<MapData[]> => {
 
 export const getMapById = async (id: string): Promise<MapData> => {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_VALORANT_API_URL || 'https://valorant-api.com/v1';
+    const baseUrl = process.env.NEXT_PUBLIC_VALORANT_API_URL;
     const response = await fetch(`${baseUrl}/maps/${id}?language=es-MX`);
     
     if (!response.ok) {
