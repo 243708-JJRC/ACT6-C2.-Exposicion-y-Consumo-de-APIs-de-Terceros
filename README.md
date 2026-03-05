@@ -37,18 +37,5 @@ src/
 └── globals.css    # Estilos Globales
 ````
 
-### Ejecución con Docker
-Para levantar el proyecto de forma local se siguen estos pasos:
-
-Configura las variables de entorno:
-Crea un archivo .env en la raíz:
-
-- La variable se encuentra en el reporte entregado de la actividad
-
-Construye y levanta el contenedor:
-
-````
-docker-compose up -d --build
-````
 Accede a la aplicación:
-Abre tu navegador en http://localhost:3000
+Abre tu navegador e ingresa el siguiente enlace: act6-c2-aplicaciones-web-243708-jjrcs-projects.vercel.app
